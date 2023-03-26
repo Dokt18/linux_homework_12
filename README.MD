@@ -1,5 +1,6 @@
 # First excercise
 ## First method
+```
 [root@selinux ~]# systemctl status firewalld
 ● firewalld.service - firewalld - dynamic firewall daemon
    Loaded: loaded (/usr/lib/systemd/system/firewalld.service; disabled; vendor preset: enabled)
@@ -61,8 +62,9 @@ Mar 26 12:59:20 selinux systemd[1]: nginx.service: control process exited, code=
 Mar 26 12:59:20 selinux systemd[1]: Failed to start The nginx HTTP and reverse proxy server.
 Mar 26 12:59:20 selinux systemd[1]: Unit nginx.service entered failed state.
 Mar 26 12:59:20 selinux systemd[1]: nginx.service failed.
-
+```
 ## Second method
+```
 [root@selinux ~]# semanage port -l | grep http
 http_cache_port_t              tcp      8080, 8118, 8123, 10001-10010
 http_cache_port_t              udp      3130
@@ -122,8 +124,9 @@ Mar 26 13:04:55 selinux systemd[1]: nginx.service: control process exited, code=
 Mar 26 13:04:55 selinux systemd[1]: Failed to start The nginx HTTP and reverse proxy server.
 Mar 26 13:04:55 selinux systemd[1]: Unit nginx.service entered failed state.
 Mar 26 13:04:55 selinux systemd[1]: nginx.service failed.
-
+```
 ## Third method
+```
 [root@selinux ~]# grep nginx /var/log/audit/audit.log | audit2allow -M nginx
 ******************** IMPORTANT ***********************
 To make this policy package active, execute:
@@ -149,8 +152,10 @@ Mar 26 13:09:14 selinux nginx[21826]: nginx: configuration file /etc/nginx/nginx
 Mar 26 13:09:14 selinux systemd[1]: Started The nginx HTTP and reverse proxy server.
 [root@selinux ~]# semodule -r nginx
 libsemanage.semanage_direct_remove_key: Removing last nginx module (no other nginx module exists at another priority).
-
+```
 # Second excercise
+
+```
 [vagrant@client ~]$ nsupdate -k /etc/named.zonetransfer.key
 > server 192.168.50.10
 > zone ddns.lab
@@ -247,4 +252,4 @@ ns01.dns.lab.		3600	IN	A	192.168.50.10
 ;; WHEN: Sun Mar 26 13:52:26 UTC 2023
 ;; MSG SIZE  rcvd: 96
 [vagrant@client ~]$ sudo restorecon -v -R /etc/named
-
+```
